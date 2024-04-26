@@ -1,0 +1,30 @@
+.menu {
+    padding: 20px 0;
+    background-color: #fff;
+    border-bottom: #b8b8b8 solid 1px;
+    margin-bottom: 80px;
+}
+
+.list {
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.link {
+    font-size: 16px;
+    font-weight: 700;
+}
