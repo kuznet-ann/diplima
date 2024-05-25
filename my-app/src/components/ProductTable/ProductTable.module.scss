@@ -1,0 +1,21 @@
+@import '../../app/sass/libs/variables';
+
+.short {
+    text-align: center;
+    width: 50px;
+}
+
+.base {
+    width: 200px;
+}
+
+.descr {
+    width: 700px;
+}
+
+.link {
+    color: $primaryColor;
+    &:hover {
+        text-decoration: underline;
+    }
+}

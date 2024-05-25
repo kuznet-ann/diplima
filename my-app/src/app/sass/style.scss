@@ -3,3 +3,9 @@
 @import 'libs/variables';
 @import 'libs/reset';
 @import 'libs/multyclasses';
+
+.test {
+    width: 70%;
+    height: 400px;
+    background-color: rebeccapurple;
+}

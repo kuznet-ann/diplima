@@ -1,0 +1,39 @@
+.wrapper {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.select {
+    margin-right: 20px;
+    color: #000;
+    font-weight: normal;
+    &:hover {
+        background-color: transparent;
+        color: #000;
+    }
+}
+
+.link {
+    border: #de7f3a 2px solid;
+    color: #000;
+}
+
+// .select {
+//     cursor: pointer;
+//     padding: 5px 10px;
+//     font-size: 16px;
+//     border-radius: 5px;
+//     border: #b8b8b8 solid 1px;
+//     &:hover {
+//         border: #de7f3a solid 1px;
+//     }
+// }
+
+.list {
+    min-width: 141px;
+}
+
+.item {
+    position: absolute;
+}

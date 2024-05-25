@@ -1,0 +1,45 @@
+@import '../../app/sass/libs/variables';
+
+.title {
+    margin-top: 40px;
+}
+
+.form {
+    margin-top: 10px;
+    width: 475px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.input {
+    width: 100%;
+}
+
+.short {
+    width: 230px;
+    box-sizing: border-box;
+}
+
+.text {
+    width: 100%;
+    padding: 5px 10px;
+    resize: none;
+    background: transparent;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    border: $primaryColor solid 2px;
+    &::placeholder {
+        color: #e0ae91;
+    }
+}
+
+.policy {
+    display: flex;
+    gap: 10px;
+    input {
+        width: 16px;
+    }
+}

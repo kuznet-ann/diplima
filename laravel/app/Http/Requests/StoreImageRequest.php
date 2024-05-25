@@ -26,7 +26,7 @@ class StoreImageRequest extends FormRequest
         return [
             'image_file' => [
                 'image',
-                'max:5120',
+                'max:51200',
                 'mimes:gif,jpeg,png,webp',
                 'min:1',
 

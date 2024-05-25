@@ -5,25 +5,28 @@ import React from 'react';
 import style from './Product.module.scss';
 import Link from 'next/link';
 
-function Product({ kkey, id, imageUrl, name, type, price }) {
-    const categories = ['Все', 'Акции', 'Наушники', 'Звуковые карты', 'Колонки'];
+function Product({ id, imageUrl, name, type, price }) {
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const data = Object.fromEntries(formData);
+        await postDataOrder(data);
+    };
 
     return (
         <Link
             href={`/products/${id}`}
             className={style.card}>
-            {/* <img
-                src={require(`../../assets/img/goods/${imageUrl}`)}
-                alt=''
-                className={style.img}
-            /> */}
-            {/* {categories.map((value, i) => (
-                <h6
-                    key={i}
-                    className={style.category}>
-                    {i === type ? value : ''}
-                </h6>
-            ))} */}
+            {imageUrl.slice(0, 1).map((img) => (
+                <>
+                    <img
+                        key={img.id}
+                        src={`http://127.0.0.1:8000/storage/${img.path}`}
+                        alt=''
+                        className={style.img}
+                    />
+                </>
+            ))}
             <h3>{name}</h3>
             <div className={style.buy}>
                 <p className={style.price}>{price}₽</p>

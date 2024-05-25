@@ -1,12 +1,12 @@
 import { Suspense } from 'react';
 
-import MenuBlock from '../../components/MenuBlock';
+import Categories from '../../components/Categories';
 import { ProductList } from '../../components/ProductsList';
-import { FooterBlock } from '../../components/FooterBlock';
+import { PageSelect } from '../../components/PageSelect';
 
 import '../sass/style.scss';
 
-const postData = async (data) => {
+const postDataProduct = async (data) => {
     const response = await fetch(`http://localhost:3000/api/v1/products`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -17,81 +17,45 @@ const postData = async (data) => {
     return response.json();
 };
 
-const getData = async () => {
-    const response = await fetch(`http://localhost:3000/api/v1/products`, {
-        next: {
-            revalidate: 1,
+const getDataProduct = async (params) => {
+    const response = await fetch(
+        `http://localhost:3000/api/v1/products/${params ? '?' + params : ''}`,
+        {
+            //передавать параметры, формируя строку
+            cache: 'no-store',
         },
-    });
+    );
     if (!response.ok) {
         throw new Error(response.status);
     }
     return await response.json();
 };
 
-// const onSubmit = async (event) => {
-//     event.preventDefault();
+export async function getDataShape(request) {
+    const response = await fetch(`http://localhost:8000/api/v1/shapes`, {
+        cache: 'no-store',
+    });
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    return await response.json();
+}
 
-//     const formData = new FormData(event.currentTarget);
-//     const data = Object.fromEntries(formData);
-
-//     await postData(data);
-// };
-const products = await getData();
+const shapes = await getDataShape();
 
 async function Page(props) {
+    const params = props.searchParams;
+    const products = await getDataProduct(new URLSearchParams(params).toString());
+
     return (
-        <>
-            <div className='container'>
-                {/* <Suspense fallback={<p>Loading feed...</p>}> */}
-                <ProductList items={products} />
-                {/* </Suspense> */}
-            </div>
-        </>
+        <div className='container'>
+            {/* {params} */}
+            {/* {JSON.stringify(props.searchParams['filter[shape]'])} */}
+            <Categories items={shapes} />
+            <ProductList items={products} />
+            <PageSelect products={products} />
+        </div>
     );
 }
 
 export default Page;
-
-{
-    /* <form onSubmit={onSubmit}>
-                    <input
-                        name='name'
-                        placeholder='name'
-                    />
-                    <input
-                        type='number'
-                        name='price'
-                        placeholder='name'
-                        value={87.99}
-                    />
-                    <input
-                        name='description'
-                        placeholder='description'
-                        value={'3456789iok'}
-                    />
-                    <input
-                        type='number'
-                        name='quantity'
-                        placeholder='name'
-                        value={43}
-                    />
-                    <input
-                        type='checkbox'
-                        name='available'
-                        value={1}
-                        checked
-                    />
-                    <input
-                        type='number'
-                        name='shape_id'
-                        value={1}
-                    />
-                    <input
-                        type='number'
-                        name='material_id'
-                        value={1}
-                    />
-                    <button type='submit'>submit</button>
-                </form> */
-}

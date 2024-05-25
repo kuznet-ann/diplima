@@ -16,15 +16,17 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('product_id')
-            ->unsigned();
+                ->unsigned();
             $table->foreign('product_id')
                 ->references('id')
                 ->on('products')
                 ->onDelete('CASCADE')
                 ->onUpdate('RESTRICT');
+
             $table->string('path', 191)
                 ->collation('utf8mb4_0900_ai_ci')
                 ->unique();
+
             $table->timestamps();
         });
     }

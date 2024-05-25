@@ -1,0 +1,11 @@
+@import '../../app/sass/libs/variables';
+
+.count {
+    width: 103px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: $secondColor solid 2px;
+    border-radius: 10px;
+}

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import MenuBlock from '../../../components/MenuBlock';
-import ProductCard from '../../../components/ProductCard';
-import { FooterBlock } from '../../../components/FooterBlock';
+import ProductInfo from '../../../components/ProductInfo/';
 
 import '../../sass/style.scss';
 
 const getData = async (slug) => {
-    const response = await fetch(`http://localhost:3000/api/v1/products/${slug}`);
+    const response = await fetch(`http://localhost:3000/api/v1/products/${slug}`, {
+        cache: 'no-store',
+    });
     if (!response.ok) {
         throw new Error(response.status);
     }
@@ -15,11 +15,11 @@ const getData = async (slug) => {
 };
 
 async function Page({ params }) {
-    const productInfo = await getData(params.slug);
+    const productData = await getData(params.slug);
     return (
         <>
             <div className='container'>
-                <ProductCard info={productInfo} />
+                <ProductInfo info={productData.data} />
             </div>
         </>
     );

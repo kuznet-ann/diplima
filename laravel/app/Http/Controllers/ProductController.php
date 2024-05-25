@@ -7,6 +7,10 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Http\Request;
+
+use function Symfony\Component\VarDumper\Dumper\esc;
 
 class ProductController extends Controller
 {
@@ -15,10 +19,42 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $products = Product::paginate(1); // paginate указывается сколько товаров запросить, разбивание по страницам
-        $products = Product::all();
+        $query = Product::query();
+        if ($request->has('filter')) {
+            $field = $request->get('filter');
+
+            if (array_key_exists('shape', $field)) {
+                $query = $query->where('shape_id', '=', function (Builder $subquery) use ($field) {
+                    $subquery->select('id')->from('shapes')->where('name', '=', $field['shape'])->limit(1);
+                });
+            }
+
+            if (array_key_exists('price', $field)) {
+                if (array_key_exists('>', $field['price'])) {
+                    $query = $query->where('price', '>', $field['price']['>']);
+                }
+                if (array_key_exists('<', $field['price'])) {
+                    $query = $query->where('price', '<', $field['price']['<']);
+                }
+            }
+        }
+
+        if ($request->has('sort')) {
+            $field = $request->get('sort');
+            if (mb_substr($field, 0, 1) === '-') {
+                $query = $query->orderBy(mb_substr($field, 1), 'desc');
+            } else {
+                $query = $query->orderBy($field, 'asc');
+            }
+        }
+
+        $products = $query->paginate(8);  //  paginate указывается сколько товаров запросить, разбивание по страницам
+        // $products = $query->get();
+
+
+        // $products = Product::all();
         return new ProductCollection($products);
     }
 
@@ -75,4 +111,13 @@ class ProductController extends Controller
         $product->delete();
         return response()->noContent(204);
     }
+
+    // public function searchFilters($request)
+    // {
+    //     $query = Product::query();
+    //     if ($request->has('name')) {
+    //         $query = $query->where('name', 'like', '%' . $request->name . '%');
+    //     }
+    //     return $query;
+    // }
 }

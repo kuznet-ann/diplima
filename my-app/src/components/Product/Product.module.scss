@@ -2,7 +2,7 @@
     cursor: pointer;
     overflow: hidden;
     position: relative;
-    padding: 290px 20px 25px;
+    padding: 318px 20px 25px;
     width: 289px;
     // min-height: 462px;
     box-sizing: border-box;
@@ -10,7 +10,7 @@
     box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.25);
     -webkit-box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.25);
-    transition: all 0.5s;
+    transition: transform 0.5s;
     &:hover {
         transform: scale(1.02);
     }
@@ -18,6 +18,10 @@
 
 .img {
     position: absolute;
+    width: 290px;
+    height: 290px;
+    object-fit: cover;
+    border-radius: 10px;
     top: 0;
     left: 0;
 }

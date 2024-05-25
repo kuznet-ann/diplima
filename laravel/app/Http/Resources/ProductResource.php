@@ -27,6 +27,10 @@ class ProductResource extends JsonResource
                 'description' => $this->description,
                 'quantity' => (int) $this->quantity,
                 'available' => (bool) $this->available,
+                'image' => $this->images
+                // 'image' => array_map(function ($image) {
+                //     return $image->path;
+                // }, $this->images)
             ],
             'relationships' => [
                 'shape' => [

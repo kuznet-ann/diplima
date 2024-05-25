@@ -24,8 +24,9 @@ class OrderProductResource extends JsonResource
             'attributes' => [
                 'price' => (float) $this->price,
                 'quantity' => (int) $this->quantity,
+                'product' => new ProductResource($this->product)
             ],
-            
+
             'relationships' => [
                 'order' => [
                     'links' => [

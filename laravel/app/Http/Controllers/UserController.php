@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -36,7 +37,41 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => [
+                'max:255',
+                'required',
+                'string',
+            ],
+            'password' => [
+                'required',
+                'string',
+            ],
+            'email' => [
+                'max:255',
+                'required',
+                'string',
+                'email:rfc',
+            ],
+            'phone' => [
+                'max:255',
+                'required',
+                'string',
+            ],
+        ]);
+        // $data = [
+        //     'name' => 'user',
+        //     'phone' => '7',
+        //     'email' => 'user@example.com',
+        //     'password' => Hash::make('12345678')
+        // ];
+        $data['password'] = Hash::make($data['password']);
+        $user = User::create($data);
+        return response()->noContent(201)->withHeaders([
+            'Location' => route('users.show', [
+                'user' => $user->id,
+            ]),
+        ]);
     }
 
     /**

@@ -36,8 +36,10 @@ class StoreOrderProductRequest extends FormRequest
                 'min:0',
                 'required',
             ],
-            'available' => [
-                'boolean',
+            'price' => [
+                'decimal:0,2',
+                'max:99999.99',
+                'min:0',
                 'required',
             ],
         ];

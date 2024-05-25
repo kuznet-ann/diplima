@@ -7,6 +7,7 @@ use App\Http\Requests\StoreOrderProductRequest;
 use App\Http\Requests\UpdateOrderProductRequest;
 use App\Http\Resources\OrderProductCollection;
 use App\Http\Resources\OrderProductResource;
+use App\Models\Product;
 
 class OrderProductController extends Controller
 {

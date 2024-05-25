@@ -1,0 +1,19 @@
+.wrapper {
+    padding: 20px;
+    box-sizing: border-box;
+    width: 681px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+    color: #b8b8b8;
+}
+
+.fz16 {
+    font-size: 16px;
+}

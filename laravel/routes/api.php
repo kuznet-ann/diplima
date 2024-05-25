@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShapeController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,4 +38,5 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('order_product', OrderProductController::class);
     Route::apiResource('order_status', OrderStatusController::class);
     Route::apiResource('users', UserController::class);
+    Route::post('login', [LoginController::class, 'authenticate']);
 });
