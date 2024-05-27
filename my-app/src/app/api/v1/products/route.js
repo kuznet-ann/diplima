@@ -4,7 +4,7 @@
 export async function GET(request) {
     const page = request.url;
     const param = page.slice(page.indexOf('?'));
-    console.log(param);
+    // console.log(param);
     const response = await fetch(`http://localhost:8000/api/v1/products/${param ? param : ''}`, {
         cache: 'no-store'
     });
@@ -36,20 +36,20 @@ export async function GET(request) {
 // ==============================
 // Add information about products
 // ==============================
-export async function POST(request) {
-    // console.log(await request.json());
-    const response = await fetch(`http://localhost:8000/api/v1/products`, {
-        headers: {
-            'Content-Type': 'application/vnd.api+json',
-            // 'API-Key': process.env.DATA_API_KEY,
-        },
-        body: JSON.stringify(await request.json()),
-        method: "POST"
-    });
-    if (!response.ok) {
-        throw new Error(response.status);
-    }
-    return new Response(null, {
-        status: response.status
-    });
-}
+// export async function POST(request) {
+//     // console.log(await request.json());
+//     const response = await fetch(`http://localhost:8000/api/v1/products`, {
+//         headers: {
+//             'Content-Type': 'application/vnd.api+json',
+//             // 'API-Key': process.env.DATA_API_KEY,
+//         },
+//         body: JSON.stringify(await request.json()),
+//         method: "POST"
+//     });
+//     if (!response.ok) {
+//         throw new Error(response.status);
+//     }
+//     return new Response(null, {
+//         status: response.status
+//     });
+// }

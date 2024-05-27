@@ -48,17 +48,16 @@ button {
     padding: 0 10px;
     height: 43px;
     min-width: 161px;
-    border: $primaryColor solid 2px;
+    border: none;
     border-radius: 5px;
-    background-color: transparent;
+    background-color: $primaryColor;
+    color: #fff;
     font-size: 16px;
     font-weight: 700;
-    color: $primaryColor;
-    cursor: pointer;
     transition: all 0.5s ease;
+    cursor: pointer;
     &:hover {
-        background-color: $primaryColor;
-        color: #fff;
+        background-color: $hoverPrimaryColor;
     }
 }
 

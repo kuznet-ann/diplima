@@ -28,16 +28,17 @@ function MenuBlock(props) {
                         </li>
                         <li className='menu__item'>
                             <Link
-                                href='/'
+                                href='/?page=1'
                                 className={style.link}>
-                                Главная
+                                Каталог
                             </Link>
                         </li>
                         <li className='menu__item'>
+                            {/* <Link href={'/create'}>Создать</Link> */}
                             <Link
-                                href='/products?page=1'
+                                href='/create'
                                 className={style.link}>
-                                Магазин
+                                Конструктор
                             </Link>
                         </li>
                     </ul>
@@ -56,7 +57,6 @@ function MenuBlock(props) {
                         <li className='menu__icons-item'>
                             <Link
                                 href='/login'
-                                // href='/account'
                                 className={style.link}>
                                 <img
                                     src={Account.src}

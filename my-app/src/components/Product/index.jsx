@@ -18,14 +18,13 @@ function Product({ id, imageUrl, name, type, price }) {
             href={`/products/${id}`}
             className={style.card}>
             {imageUrl.slice(0, 1).map((img) => (
-                <>
+                <div key={img.id}>
                     <img
-                        key={img.id}
                         src={`http://127.0.0.1:8000/storage/${img.path}`}
                         alt=''
                         className={style.img}
                     />
-                </>
+                </div>
             ))}
             <h3>{name}</h3>
             <div className={style.buy}>
