@@ -42,9 +42,6 @@ class UpdateProductRequest extends FormRequest
                 'max:2147483647',
                 'min:0',
             ],
-            'available' => [
-                'boolean',
-            ],
             'shape_id' => [
                 'exists:shapes,id',
             ],

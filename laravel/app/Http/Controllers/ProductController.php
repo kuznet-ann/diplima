@@ -67,6 +67,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->validated();
+        $data['available'] = isset($data['available']);
         $product = Product::create($data);
         return response()->noContent(201)->withHeaders([
             'Location' => route('products.show', [

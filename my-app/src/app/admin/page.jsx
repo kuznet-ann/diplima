@@ -1,26 +1,32 @@
 import React from 'react';
+import Link from 'next/link';
 
 import '../sass/style.scss';
 
 import ProductTable from '../../components/ProductTable';
+import { PageSelect } from '../../components/PageSelect';
 
-const getDataProduct = async (page) => {
-    const response = await fetch(`http://localhost:3000/api/v1/products?page=${page}`, {
-        cache: 'no-store',
-    });
+const getDataProduct = async (params) => {
+    const response = await fetch(
+        `http://localhost:3000/api/v1/products/${params ? '?' + params : ''}`,
+        {
+            cache: 'no-store',
+        },
+    );
     if (!response.ok) {
         throw new Error(response.status);
     }
     return await response.json();
 };
-
 async function Page(props) {
-    const products = await getDataProduct(props.searchParams.page);
-
+    const params = props.searchParams;
+    const products = await getDataProduct(new URLSearchParams(params).toString());
+    const shapes = await getDataProduct();
     return (
         <div className='container'>
-            <h3>Админ панель</h3>
+            <h3>Админ панель</h3> <Link href={'/admin/addProduct/'}>Добавить продукт</Link>
             <ProductTable products={products.data} />
+            <PageSelect products={products} />
         </div>
     );
 }

@@ -51,7 +51,7 @@ class UserController extends Controller
                 'max:255',
                 'required',
                 'string',
-                'email:rfc',
+                // 'email:rfc',
             ],
             'phone' => [
                 'max:255',

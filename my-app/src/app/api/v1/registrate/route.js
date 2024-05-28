@@ -18,7 +18,8 @@ export async function POST(request) {
             'email': 'user1@example.com',
             'password': '12345678'
         },
-        method: "POST"
+        method: "POST",
+        cache: "no-store"
     });
     console.log(response);
 

@@ -37,9 +37,6 @@ async function Page(props) {
 
     return (
         <div className='container'>
-            {JSON.stringify(products) ? '1' : '0'}
-            {/* {params} */}
-            {/* {JSON.stringify(props.searchParams['filter[shape]'])} */}
             <Categories items={shapes} />
             <ProductList items={products} />
             <PageSelect products={products} />
