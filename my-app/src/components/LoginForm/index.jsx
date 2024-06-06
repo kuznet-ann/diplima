@@ -3,26 +3,16 @@
 import Link from 'next/link';
 import React from 'react';
 
-const postData = async (data) => {
-    // const response = await fetch(`http://127.0.0.1:8000/api/v1/login`, {
-    //     method: 'POST',
-    //     body: JSON.stringify(data),
-    // });
-    // if (!response.ok) {
-    //     throw new Error(response.status);
-    // }
-    // return response.json();
-    console.log('h1');
+import style from './LoginForm.module.scss';
 
-    const url = new URL('http://localhost:8000/api/v1/login');
-    const response = await fetch(url, {
-        body: JSON.stringify({
-            email: 'user@example.com',
-            password: '12345678',
-        }),
+const postData = async (data) => {
+    const response = await fetch(`http://localhost:3000/api/v1/login`, {
+        body: JSON.stringify(data),
+        cache: 'no-store',
         headers: {
+            'Content-Type': 'application/vnd.api+json',
             Accept: 'application/vnd.api+json',
-            'Content-Type': 'application/json',
+            // 'API-Key': process.env.DATA_API_KEY,
         },
         method: 'POST',
     });
@@ -31,17 +21,29 @@ const postData = async (data) => {
         throw new Error(response.statusText);
     }
 
-    return await response.json();
+    return response.json();
+};
+
+const onSubmit = async (event, router) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData);
+    const response = await postData(data);
+    alert(response.token);
+
+    // if (response.status === 201) {
+    //     router.push('/admin');
+    // }
 };
 
 export default function LoginForm() {
     return (
         <>
-            <h1>Авторизация</h1>
+            <h1 className='tac'>Авторизация</h1>
             <form
-                method='post'
-                // action={'http://localhost:8000/api/v1/login'}
-            >
+                className={style.form}
+                onSubmit={onSubmit}
+                method='post'>
                 <input
                     name='email'
                     type='text'
@@ -54,18 +56,13 @@ export default function LoginForm() {
                     placeholder='Пароль'
                     required
                 />
-                <button
-                    onSubmit={async () => {
-                        // window.preventDefault();
-                        const response = await postData();
-                        alert(response.token);
-                        console.log(response.token);
-                    }}
-                    type='submit'>
-                    Войти
-                </button>
+                <button type='submit'>Войти</button>
             </form>
-            <Link href={'/registration/'}>Нет аккаунта? Зарегистрироваться!</Link>
+            <Link
+                className={style.link}
+                href={'/registration/'}>
+                Нет аккаунта? Зарегистрироваться!
+            </Link>
         </>
     );
 }

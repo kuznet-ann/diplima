@@ -10,10 +10,7 @@ class LoginController extends Controller
 {
     public function authenticate(Request $request): Response
     {
-        $credentials = [
-            'email' => 'user@example.com',
-            'password' => '12345678'
-        ];
+        $credentials = $request->all();
         if (Auth::attempt($credentials)) {
             $token = $request->user()->createToken('lalala');
             return response(['token' => $token->plainTextToken]);

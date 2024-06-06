@@ -9,7 +9,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 const sortArray = [
     { name: 'От А до Я', key: 'name' },
     { name: 'От Я до А', key: '-name' },
-    { name: 'По убывании цены', key: '-price' },
+    { name: 'По убыванию цены', key: '-price' },
     { name: 'По возрастанию цены', key: 'price' },
 ];
 

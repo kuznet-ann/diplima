@@ -28,6 +28,12 @@ export default async function Page({ params }) {
                 items={products.data}
                 id={params.slug}
             />
+            <form
+                method='post'
+                encType='multipart/form-data'>
+                <input type='file' />
+                <button type='submit'></button>
+            </form>
         </div>
     );
 }

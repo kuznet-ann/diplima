@@ -6,35 +6,43 @@ import Link from 'next/link';
 import style from './RegForm.module.scss';
 
 const postData = async (data) => {
-    console.log(data);
-    const response = await fetch(`http://localhost:8000/api/v1/users`, {
+    const response = await fetch(`http://localhost:3000/api/v1/registrate`, {
+        body: JSON.stringify(data),
+        cache: 'no-store',
+        headers: {
+            'Content-Type': 'application/vnd.api+json',
+            Accept: 'application/vnd.api+json',
+        },
         method: 'POST',
-        body: data,
     });
     if (!response.ok) {
-        throw new Error(response.status);
+        console.log(response);
+        throw new Error(404);
     }
-    return response.json();
+
+    return new Response(null, {
+        status: response.status,
+    });
 };
 
-const onSubmit = async (event) => {
+const onSubmit = async (event, router) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    // const data = Object.fromEntries(formData);
-    console.log(formData);
-    await postData(formData);
+    const data = Object.fromEntries(formData);
+    const response = await postData(data);
+    // if (response.status === 201) {
+    //     router.push('/admin');
+    // }
 };
 
 export default function RegForm() {
     return (
         <>
-            <h1>Регистрация</h1>
+            <h1 className='tac'>Регистрация</h1>
             <form
                 className={style.form}
                 method='post'
-                onSubmit={onSubmit}
-                // action={'http://127.0.0.1:3000/api/v1/registrate'}
-            >
+                onSubmit={onSubmit}>
                 <input
                     name='name'
                     type='text'
@@ -47,6 +55,9 @@ export default function RegForm() {
                     placeholder='Пароль'
                     required
                 />
+                {/* <p className='error'>
+                    Поле должно содержать специальные символы (!, @, #, $, %, ^, &, *)
+                </p> */}
                 <input
                     name='email'
                     type='email'
@@ -61,7 +72,11 @@ export default function RegForm() {
                 />
                 <button type='submit'>Зарегистрироваться</button>
             </form>
-            <Link href={'/login/'}>Есть аккаунт? Войти!</Link>
+            <Link
+                className={style.link}
+                href={'/login/'}>
+                Есть аккаунт? Войти!
+            </Link>
         </>
     );
 }
