@@ -1,18 +1,36 @@
 @import '../../app/sass/libs/variables';
 
+.wrapper {
+    width: 400px;
+}
+
+.form {
+    margin-top: 20px;
+    display: flex;
+    width: 400px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.flex {
+    display: flex;
+    gap: 20px;
+    margin-left: 95px;
+}
+
 .info {
     width: 400px;
-    display: flex;
-    justify-content: space-between;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 100px 300px;
 }
 
 .text {
-    width: 70%;
     font-weight: normal;
 }
 
 .descr {
-    width: 70%;
+    height: 120px;
     padding: 5px 10px;
     resize: none;
     background: transparent;
@@ -21,5 +39,25 @@
     border: $primaryColor solid 2px;
     &::placeholder {
         color: #e0ae91;
+    }
+}
+
+.err {
+    grid-column: 2/3;
+}
+
+.btn {
+    margin-left: 95px;
+    margin-top: 20px;
+    display: block;
+    width: 300px;
+}
+
+.delete {
+    width: 300px;
+    margin-top: 20px;
+    background-color: $redColor;
+    &:hover {
+        background-color: $redColorPress;
     }
 }

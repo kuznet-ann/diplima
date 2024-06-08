@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 import React from 'react';
 
@@ -9,7 +9,7 @@ import Account from '../../../public/assets/icons/account.svg';
 import style from './MenuBlockStyle.module.scss';
 import Link from 'next/link';
 
-function MenuBlock(props) {
+function MenuBlock({ auth }) {
     return (
         <div className='container'>
             <header className={style.menu}>
@@ -34,7 +34,6 @@ function MenuBlock(props) {
                             </Link>
                         </li>
                         <li className='menu__item'>
-                            {/* <Link href={'/create'}>Создать</Link> */}
                             <Link
                                 href='/create'
                                 className={style.link}>
@@ -54,17 +53,31 @@ function MenuBlock(props) {
                                 />
                             </Link>
                         </li>
-                        <li className='menu__icons-item'>
-                            <Link
-                                href='/login'
-                                className={style.link}>
-                                <img
-                                    src={Account.src}
-                                    alt=''
-                                    className='menu__icon'
-                                />
-                            </Link>
-                        </li>
+                        {auth ? (
+                            <li className='menu__icons-item'>
+                                <Link
+                                    href='/account'
+                                    className={style.link}>
+                                    <img
+                                        src={Account.src}
+                                        alt=''
+                                        className='menu__icon'
+                                    />
+                                </Link>
+                            </li>
+                        ) : (
+                            <li className='menu__icons-item'>
+                                <Link
+                                    href='/login'
+                                    className={style.link}>
+                                    <img
+                                        src={Account.src}
+                                        alt=''
+                                        className='menu__icon'
+                                    />
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </nav>
             </header>

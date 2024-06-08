@@ -42,9 +42,9 @@ function ProductInfo({ info }) {
                 </div>
             </div>
             <div>
-                <h2 className={style.title}>{data.name}</h2>
-                <p className={style.mg40}>Количество товара: {data.quantity}</p>
-                <p className={style.mg40}>{data.price}₽</p>
+                <h1 className={style.title}>{data.name}</h1>
+                <p className={style.mg40}>Количество товара на складе: {data.quantity}</p>
+                <h2 className={style.mg40}>{data.price} ₽</h2>
                 <button className={`btn ${style.mg40}`}>Купить</button>
                 <h5 className={style.subtitle}>Описание</h5>
                 <p>{data.description}</p>

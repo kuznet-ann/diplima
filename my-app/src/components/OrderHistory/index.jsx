@@ -1,10 +1,30 @@
+'use client';
 import React from 'react';
+
+export async function exit(token) {
+    const response = await fetch(`http://localhost:3000/api/v1/logout`, {
+        cache: 'no-store',
+        headers: {
+            Accept: 'application/vnd.api+json',
+            Authorization: `Bearer ${token}`,
+        },
+        method: 'POST',
+    });
+    return new Response(null, {
+        status: response.status,
+    });
+}
+
+const onDelete = async ({ token }) => {
+    const response = await exit(token);
+};
 
 import style from './OrderHistory.module.scss';
 
-export default function OrderHistory() {
+export default function OrderHistory({ token }) {
     return (
         <div>
+            <button onClick={() => onDelete(token)}>Выйти</button>
             <h4>История заказов</h4>
             <div className={style.wrapper}>
                 <span>

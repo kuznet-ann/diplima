@@ -46,6 +46,7 @@ class StoreProductRequest extends FormRequest
                 'min:0',
                 'required',
             ],
+            'available' => [],
             'shape_id' => [
                 'exists:shapes,id',
             ],

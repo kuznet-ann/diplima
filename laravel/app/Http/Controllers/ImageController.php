@@ -35,7 +35,7 @@ class ImageController extends Controller
         $data = $request->validated();
         $imageFile = $request->file('image_file');
         // realpath() Получение абсолютного пути
-        $temp = tempnam('C:/OpenServer/domains/diplima/laravel/storage/app/public', '');
+        $temp = tempnam(realpath('storage/app/public'), '');
 
         $fileType = exif_imagetype($imageFile->getPathname());
         switch ($fileType) {

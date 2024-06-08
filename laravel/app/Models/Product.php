@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
@@ -19,6 +20,18 @@ class Product extends Model
     {
         return $this->hasMany(OrderProduct::class);
     }
+
+    public function shape(): BelongsTo
+    {
+        return $this->belongsTo(Shape::class);
+    }
+
+    public function material(): BelongsTo
+    {
+        return $this->belongsTo(Material::class);
+    }
+
+
 
     protected $fillable = [
         'name',

@@ -30,7 +30,7 @@ export async function PUT(request, {
         method: "PUT",
         cache: 'no-store'
     });
-    if (!response.ok) {
+    if (!response.ok && response.status != 422) {
         throw new Error(response.status);
     }
     return new Response(null, {

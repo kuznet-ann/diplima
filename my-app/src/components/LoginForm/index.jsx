@@ -16,12 +16,13 @@ const postData = async (data) => {
         },
         method: 'POST',
     });
+
     if (!response.ok) {
         // Activates the closest `error.js` error boundary.
-        throw new Error(response.statusText);
+        throw new Error(response.status);
     }
 
-    return response.json();
+    return response;
 };
 
 const onSubmit = async (event, router) => {
@@ -29,7 +30,6 @@ const onSubmit = async (event, router) => {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
     const response = await postData(data);
-    alert(response.token);
 
     // if (response.status === 201) {
     //     router.push('/admin');

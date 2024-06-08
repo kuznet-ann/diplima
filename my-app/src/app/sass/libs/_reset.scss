@@ -11,6 +11,10 @@
 a {
     color: $baseColor;
     text-decoration: none;
+    transition: 0.2s;
+    &:hover {
+        color: $primaryColor;
+    }
 }
 
 ul {
@@ -23,7 +27,7 @@ h1 {
 
 h2 {
     font-size: 33px;
-    margin-top: 80px;
+    // margin-top: 80px;
 }
 
 h3 {
@@ -80,6 +84,10 @@ input {
     &::placeholder {
         color: #e0ae91;
     }
+}
+
+input[type='file'] {
+    border: none;
 }
 
 table {

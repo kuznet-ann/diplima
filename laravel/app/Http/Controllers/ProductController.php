@@ -9,6 +9,7 @@ use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use function Symfony\Component\VarDumper\Dumper\esc;
 
@@ -50,11 +51,9 @@ class ProductController extends Controller
             }
         }
 
+        // echo auth()->user()->id;
+
         $products = $query->paginate(8);  //  paginate указывается сколько товаров запросить, разбивание по страницам
-        // $products = $query->get();
-
-
-        // $products = Product::all();
         return new ProductCollection($products);
     }
 
@@ -97,6 +96,7 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $data = $request->validated();
+        $data['available'] = isset($data['available']);
         $product->update($data);
         return response()->noContent(204);
     }

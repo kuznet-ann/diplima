@@ -27,7 +27,7 @@ class UpdateProductRequest extends FormRequest
             'name' => [
                 'max:55',
                 'string',
-                'unique:products,name',
+                // 'unique:products,name',
             ],
             'price' => [
                 'decimal:0,2',
@@ -42,6 +42,7 @@ class UpdateProductRequest extends FormRequest
                 'max:2147483647',
                 'min:0',
             ],
+            'available' => [],
             'shape_id' => [
                 'exists:shapes,id',
             ],

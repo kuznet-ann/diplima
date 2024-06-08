@@ -24,7 +24,14 @@ async function Page(props) {
     const shapes = await getDataProduct();
     return (
         <div className='container'>
-            <h3>Админ панель</h3> <Link href={'/admin/addProduct/'}>Добавить продукт</Link>
+            <div className='inline'>
+                <h3>Админ панель</h3>
+                <Link
+                    className='link'
+                    href={'/admin/addProduct/'}>
+                    Добавить продукт
+                </Link>
+            </div>
             <ProductTable products={products.data} />
             <PageSelect products={products} />
         </div>

@@ -32,7 +32,7 @@ const getDataProduct = async (params) => {
 };
 
 export async function getDataShape(request) {
-    const response = await fetch(`http://localhost:8000/api/v1/shapes`, {
+    const response = await fetch(`http://localhost:3000/api/v1/shapes`, {
         cache: 'no-store',
     });
     if (!response.ok) {

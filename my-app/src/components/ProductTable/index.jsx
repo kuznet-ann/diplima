@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export default function ProductTable({ products }) {
     return (
-        <table>
+        <table className={style.table}>
             <tbody>
                 <tr>
                     <th className={style.short}>id</th>

@@ -4,14 +4,25 @@ import '../sass/style.scss';
 
 import ProductCart from '../../components/ProductCart/';
 import PaymentBlock from '../../components/PaymentBlock/';
+import { cookies } from 'next/headers';
 
 const getData = async () => {
-    const response = await fetch(`http://localhost:8000/api/v1/order_product`, {
+    const token = cookies().get('sid');
+    const response = await fetch(`http://localhost:3000/api/v1/cart`, {
         cache: 'no-store',
+        headers: {
+            Accept: 'application/vnd.api+json',
+            Authorization: `Bearer ${token.value}`,
+        },
     });
-    if (!response.ok) {
+    if (!response.ok && response.status != 401) {
         throw new Error(response.status);
     }
+
+    if (response.status === 401) {
+        return {};
+    }
+
     return await response.json();
 };
 
@@ -21,13 +32,19 @@ async function Page() {
     return (
         <>
             <div className='container'>
-                <h2>Корзина</h2>
-                <div className='wrapper'>
-                    <div>
-                        <ProductCart info={data.data} />
-                    </div>
-                    <PaymentBlock />
-                </div>
+                {Object.keys(data).length != 0 ? (
+                    <>
+                        <h2>Корзина</h2>
+                        <div className='wrapper'>
+                            <div>
+                                <ProductCart info={data.data} />
+                            </div>
+                            <PaymentBlock />
+                        </div>
+                    </>
+                ) : (
+                    'Вам необходимо авторизоваться!'
+                )}
             </div>
         </>
     );

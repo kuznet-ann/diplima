@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers';
+
 import MenuBlock from '../components/MenuBlock';
 import { FooterBlock } from '../components/FooterBlock';
 
@@ -7,10 +9,11 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+    const token = cookies().get('sid');
     return (
         <html lang='ru-luna1918'>
             <body>
-                <MenuBlock />
+                <MenuBlock auth={token} />
                 {children}
                 <FooterBlock />
             </body>

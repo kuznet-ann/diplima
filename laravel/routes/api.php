@@ -39,4 +39,5 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('order_status', OrderStatusController::class);
     Route::apiResource('users', UserController::class);
     Route::post('login', [LoginController::class, 'authenticate']);
+    Route::post('logout', [LoginController::class, 'logout']);
 });

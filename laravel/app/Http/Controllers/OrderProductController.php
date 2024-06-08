@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateOrderProductRequest;
 use App\Http\Resources\OrderProductCollection;
 use App\Http\Resources\OrderProductResource;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class OrderProductController extends Controller
 {
@@ -19,7 +20,11 @@ class OrderProductController extends Controller
     public function index()
     {
         $orderProduct = OrderProduct::all();
-        return new OrderProductCollection($orderProduct);
+        if (Auth::user()) {
+            return new OrderProductCollection($orderProduct);
+        } else {
+            return response()->noContent(401);
+        }
     }
 
     /**
